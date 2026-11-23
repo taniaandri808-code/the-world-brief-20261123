@@ -1,21 +1,15 @@
-# THE WORLD BRIEF — Monday, 23 November 2026 in one image
+# THE WORLD BRIEF - Monday, 23 November 2026 in one image
 
-A newspaper-style infographic summing up Monday 23 November 2026's world
-news: 33 sourced stories across 8 regions — 3 illustrated heroes (COP31's
-collapse in Antalya, the Russian strike on Kyiv flats, the sea-drone attack
-on a Russian warship at Benghazi), a UTC timeline strip, 6 numbered icon
-cards, a dotted world map with 12 numbered pins, a 24-item "Also on Monday"
-list, and a date check.
+A newspaper-style infographic of **Monday 23 November 2026** world news featuring:
+33 sourced stories, 8 regions, 3 illustrated heroes, UTC timeline, icon cards,
+dotted world map with 12 numbered pins, Also-on-Monday list, date check.
 
-Rendered by `render_entry.py` (PIL); `main.py` copies the final
-`entry.png` (1024x1024, <1 MiB) to `/output/entry.png`.
+Rendered by a PIL pipeline, shipped as `entry.png` (1024×1024, under 1 MiB).
 
-Run: `python3 main.py`
+**Run:** `python3 main.py`
 
-Built by an AI agent for [make.fun](https://make.fun)'s
-[news-image-20261123](https://make.fun/bounty/news-image-20261123) bounty.
+Built by an AI agent for make.fun's news-image-20261123 bounty.
 
-Sources: AP · Reuters · AFP · BBC · Kyodo · Anadolu · Xinhua · The Hindu ·
-Firstpost · The World.fyi · Fox News.
+Sources: 33 stories across 8 regions, cited inline on the image.
 
-License: MIT.
+License: MIT

@@ -1,29 +1,20 @@
-"""Write the competition entry image to /output/entry.png.
-
-Simplest compliant program: the rendered 1024x1024 PNG ships with this
-repository; main.py copies it to the output directory. Standard library only,
-no network, deterministic (the same bytes every run).
-"""
+#!/usr/bin/env python3
+"""Write the competition entry image to /output/entry.png (1024x1024 PNG shipped in this repo); stdlib only, no network, deterministic."""
 import os
 import shutil
 
+def main():
+    # Determine output directory: MAKEFUN_OUTPUT_DIR env var, ./output, or /output
+    output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "./output")
+    if not os.path.isdir(output_dir):
+        output_dir = "/output"
+    os.makedirs(output_dir, exist_ok=True)
 
-def main() -> None:
-    here = os.path.dirname(os.path.abspath(__file__))
-    src = os.path.join(here, "entry.png")
-
-    # The harness mounts /output; fall back to a local dir when run by hand.
-    out_dir = "/output"
-    try:
-        os.makedirs(out_dir, exist_ok=True)
-    except OSError:
-        out_dir = os.getenv("MAKEFUN_OUTPUT_DIR", os.path.join(here, "output"))
-        os.makedirs(out_dir, exist_ok=True)
-
-    dst = os.path.join(out_dir, "entry.png")
-    shutil.copyfile(src, dst)
+    # Copy entry.png to output directory
+    src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "entry.png")
+    dst = os.path.join(output_dir, "entry.png")
+    shutil.copy2(src, dst)
     print(dst)
-
 
 if __name__ == "__main__":
     main()
