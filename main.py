@@ -5,9 +5,11 @@ import shutil
 
 def main():
     # Determine output directory: MAKEFUN_OUTPUT_DIR env var, ./output, or /output
-    output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "./output")
-    if not os.path.isdir(output_dir):
+    # Prefer /output if it exists, otherwise use MAKEFUN_OUTPUT_DIR or ./output
+    if os.path.isdir("/output"):
         output_dir = "/output"
+    else:
+        output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "./output")
     os.makedirs(output_dir, exist_ok=True)
 
     # Copy entry.png to output directory
