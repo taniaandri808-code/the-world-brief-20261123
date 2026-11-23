@@ -1,4 +1,0 @@
-#!/bin/bash
-cd /root/newsimg23-entry
-export CHAIN_API_KEY=dummy
-exec timeout 600 codex exec --sandbox danger-full-access --skip-git-repo-check -c model='"openai/gpt-oss-120b"' "Edit ONLY /root/newsimg23-entry/hero_scene_patch.py (small file, read lines around the def hero_scene part). Make the three scenes richer per flat-newspaper style: scene 'smoke' add a horseshoe delegates table with 10 head circles + podium block + navy banner with amber 'COP31' text; scene 'rubble' add angled slab with 2 window rows, a red-cross square on one rescuer, 12 scattered debris blocks; scene 'ship' add a second smoke plume, white superstructure block, antenna mast on the drone boat. No changes outside hero_scene/hero helpers, no randomness, no network. Then run: python3 -c \"import render_entry\" is NOT needed; just run python3 render_entry.py and confirm bytes < 1048576. End output with DONE." 
