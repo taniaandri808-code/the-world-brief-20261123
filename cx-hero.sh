@@ -1,0 +1,4 @@
+#!/bin/bash
+cd /root/newsimg23-entry
+export CHAIN_API_KEY=dummy
+exec timeout 760 codex exec --sandbox danger-full-access --skip-git-repo-check -c model='"openai/gpt-oss-120b"' "You MUST edit render_entry.py with apply_patch. The three hero illustrations (hero_scene) are too bare. Make these concrete edits, then verify: (1) smoke scene: add a horseshoe-shaped delegates table with 10 small head circles, a podium block, and make the banner dark navy with amber COP31 text. (2) rubble scene: make the fallen slab angled with two visible window rows, add a red cross bandage square for one rescuer, and 12 scattered debris blocks. (3) ship scene: add a second smoke plume, a white ship superstructure block, and an antenna mast on the drone boat. Keep flat newspaper style, existing palette, no randomness, no network, no changes outside hero_scene. After editing run python3 render_entry.py (must print bytes under 1048576). Print DONE plus a one-line summary."

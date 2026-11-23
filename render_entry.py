@@ -224,32 +224,50 @@ def hero_scene(scene, x0, y0, w, h):
     if scene == "smoke":
         d.rectangle([x0, y0, x0 + w, y0 + 8], fill="#d9cfae")
         d.rectangle([x0, base - 2, x0 + w, base + 12], fill="#7fa06f")
-        # plenary hall: table + flags
-        d.rectangle([cx - 90, base - 26, cx + 90, base - 20], fill="#8a6a45")
+        # plenary hall: horseshoe delegates table with heads, podium, flags
+        d.arc([cx - 92, base - 62, cx + 92, base + 10], 180, 360, fill="#8a6a45", width=10)
+        for k in range(10):
+            ang = 3.14159 * k / 9
+            hx = cx + 78 * (-1 if k < 5 else 1) * 0 + (68) * ((k / 4.5) - 1)
+            hy = base - 30 - 24 * (1 - ((k / 4.5) - 1) ** 2)
+            d.ellipse([hx - 5, hy - 9, hx + 5, hy + 1], fill="#5a5145")
+        d.rectangle([cx - 40, base - 40, cx + 40, base - 34], fill="#8a6a45")
         for i, c in enumerate([NAVY, RED, TEAL, AMBER, "#5a5145"]):
             fx = cx - 70 + i * 36
-            d.line([fx, base - 20, fx, base - 44], fill=GREY, width=2)
-            d.rectangle([fx, base - 44, fx + 16, base - 32], fill=c)
+            d.line([fx, base - 34, fx, base - 52], fill=GREY, width=2)
+            d.rectangle([fx, base - 52, fx + 16, base - 40], fill=c)
+        # podium
+        d.rectangle([cx + 96, base - 26, cx + 118, base - 6], fill="#6d523a")
+        d.line([cx + 107, base - 26, cx + 107, base - 36], fill="#6d523a", width=3)
         # gavel
         d.line([cx + 60, base - 30, cx + 84, base - 54], fill="#4a3320", width=7)
         # banner
-        d.rectangle([x0 + 8, y0 + 12, x0 + 204, y0 + 38], fill=TEAL)
-        text(x0 + 106, y0 + 25, "COP31 · NO CONSENSUS", san_b(12), PAPER, anchor="mm")
+        d.rectangle([x0 + 8, y0 + 12, x0 + 204, y0 + 38], fill=NAVY)
+        text(x0 + 106, y0 + 25, "COP31 · NO CONSENSUS", san_b(12), AMBER, anchor="mm")
     elif scene == "rubble":
         d.rectangle([x0, base - 2, x0 + w, base + 12], fill="#8f8670")
         # slab-like tower broken
         d.rectangle([cx - 88, y0 + 14, cx - 34, base - 6], fill="#a9a08c")
         d.rectangle([cx - 88, y0 + 14, cx - 34, y0 + 20], fill="#5c5344")
         d.polygon([(cx - 30, base - 6), (cx - 30, y0 + 60), (cx + 6, y0 + 96), (cx + 6, base - 6)], fill="#b3a892")
-        for k in range(9):
-            bx = cx - 22 + (k % 5) * 11
-            by = base - 8 - (k // 5) * 9 - (k % 3) * 3
-            d.rectangle([bx, by, bx + 8, by + 5], fill="#7d7460")
-        # rescuers
-        for dx_ in (-46, -18, 14):
+        # two window rows on the fallen slab
+        for r_ in range(2):
+            for k in range(5):
+                wx = cx - 24 + k * 11 + r_ * 3
+                wy = y0 + 70 + r_ * 14
+                d.rectangle([wx, wy, wx + 7, wy + 9], fill="#4a4033")
+        for k in range(12):
+            bx = cx - 46 + (k % 6) * 12
+            by = base - 10 - (k // 6) * 8 - (k % 3) * 3
+            d.rectangle([bx, by, bx + 9, by + 5], fill="#7d7460")
+        # rescuers; first wears a red cross armband square
+        for j, dx_ in enumerate((-52, -22, 16)):
             hx = cx + dx_
-            d.ellipse([hx - 4, base - 34, hx + 4, base - 26], fill=AMBER)
-            d.rectangle([hx - 5, base - 26, hx + 5, base - 10], fill=TEAL)
+            d.ellipse([hx - 4, base - 36, hx + 4, base - 28], fill=AMBER)
+            d.rectangle([hx - 5, base - 28, hx + 5, base - 10], fill=TEAL)
+            if j == 1:
+                d.rectangle([hx - 2, base - 27, hx + 2, base - 23], fill="#f2ede0")
+                d.line([hx - 1, base - 26, hx + 1, base - 24], fill=RED, width=1)
         d.line([x0 + 18, y0 + 20, x0 + 18, y0 + 26], fill=RED, width=3)
     elif scene == "ship":
         d.rectangle([x0, base - 2, x0 + w, base + 12], fill="#4d6f88")
@@ -257,16 +275,21 @@ def hero_scene(scene, x0, y0, w, h):
             d.arc([x0 + 10 + k * 44, base - 4, x0 + 54 + k * 44, base + 6], 180, 360, fill="#7fa0b5", width=2)
         # hull
         d.polygon([(cx - 100, base - 6), (cx + 100, base - 6), (cx + 84, base - 26), (cx - 84, base - 26)], fill=NAVY)
-        d.rectangle([cx - 34, base - 48, cx + 2, base - 26], fill="#31425f")
+        # white superstructure block
+        d.rectangle([cx - 34, base - 48, cx + 2, base - 26], fill="#e8e2d2")
+        d.rectangle([cx - 26, base - 44, cx - 6, base - 36], fill="#31425f")
         d.rectangle([cx - 22, base - 56, cx - 14, base - 48], fill=RED)
-        # fire + smoke
+        # fire + two smoke plumes
         d.polygon([(cx - 60, base - 26), (cx - 52, base - 48), (cx - 44, base - 26)], fill="#e0a02c")
         d.polygon([(cx - 54, base - 26), (cx - 49, base - 40), (cx - 44, base - 26)], fill=RED)
         d.ellipse([cx - 66, base - 66, cx - 38, base - 44], fill="#9a9487")
         d.ellipse([cx - 56, base - 80, cx - 30, base - 60], fill="#b0a999")
-        # drone boat
+        d.ellipse([cx - 30, base - 58, cx - 8, base - 40], fill="#a39c8d")
+        d.ellipse([cx - 24, base - 72, cx - 4, base - 54], fill="#b5b0a2")
+        # drone boat with antenna mast
         d.polygon([(cx + 52, base - 12), (cx + 92, base - 12), (cx + 84, base - 20), (cx + 60, base - 20)], fill="#2b2b2b")
-        d.line([cx + 70, base - 20, cx + 70, base - 30], fill="#2b2b2b", width=2)
+        d.line([cx + 70, base - 20, cx + 70, base - 34], fill="#2b2b2b", width=2)
+        d.ellipse([cx + 68, base - 36, cx + 72, base - 32], fill="#2b2b2b")
 
 for i, hst in enumerate(HEROES):
     x0 = M + i * (hero_w + 12)
